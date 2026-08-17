@@ -75,12 +75,12 @@ export const HeroTitleLogo: React.FC<HeroTitleLogoProps> = ({
         {/* ROW 1: [ LEFT: MIXED ]  —  [ CENTER: EMBLEM ]  —  [ RIGHT: SIGNALS. ]                    */}
         {/* Seamless transparent backgrounds without any rectangular boxes, borders, or artifacts     */}
         {/* ========================================================================================= */}
-        <div className="relative flex flex-row items-center justify-center gap-4 sm:gap-5 md:gap-6 w-full py-1">
+        <div className="relative flex flex-row items-center justify-center gap-1.5 xs:gap-2.5 sm:gap-5 md:gap-6 w-full max-w-full py-1">
           
           {/* Orbital Planetary Light Ring */}
           {hasOrbitalRing && (
             <svg 
-              className="absolute -inset-x-8 sm:-inset-x-16 -inset-y-6 sm:-inset-y-8 w-[calc(100%+4rem)] sm:w-[calc(100%+8rem)] h-[calc(100%+3rem)] sm:h-[calc(100%+4rem)] pointer-events-none -z-10 animate-[pulse_4s_ease-in-out_infinite]" 
+              className="absolute -inset-x-4 sm:-inset-x-16 -inset-y-4 sm:-inset-y-8 w-[calc(100%+2rem)] sm:w-[calc(100%+8rem)] h-[calc(100%+2rem)] sm:h-[calc(100%+4rem)] pointer-events-none -z-10 animate-[pulse_4s_ease-in-out_infinite]" 
               viewBox="0 0 500 160" 
               fill="none"
             >
@@ -121,7 +121,7 @@ export const HeroTitleLogo: React.FC<HeroTitleLogoProps> = ({
             <div className={`relative inline-flex items-center ${isHovered ? 'glitch-hover-mixed' : ''}`}>
               {/* "MIXED" Outlined Text */}
               <h1 
-                className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] 2xl:text-[6.5rem] font-display-custom font-black tracking-wider uppercase logo-mixed-neon transition-all duration-200 transform whitespace-nowrap leading-none text-right"
+                className="text-2xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] 2xl:text-[6.5rem] font-display-custom font-black tracking-wide sm:tracking-wider uppercase logo-mixed-neon transition-all duration-200 transform whitespace-nowrap leading-none text-right"
                 style={{
                   textShadow: isHovered
                     ? `-4px 0 2px rgba(6, 182, 212, 0.95), 4px 0 2px rgba(236, 72, 153, 0.9), 0 0 25px ${themeAccent}E6, 0 0 45px ${themeGlow}`
@@ -138,7 +138,7 @@ export const HeroTitleLogo: React.FC<HeroTitleLogoProps> = ({
                 } transition-transform duration-200`}
               >
                 <svg 
-                  className="w-3.5 h-3.5 sm:w-5 sm:h-5 md:w-6 md:h-6 text-cyan-300 drop-shadow-[0_0_12px_#38bdf8]" 
+                  className="w-2.5 h-2.5 xs:w-3.5 xs:h-3.5 sm:w-5 sm:h-5 md:w-6 md:h-6 text-cyan-300 drop-shadow-[0_0_12px_#38bdf8]" 
                   viewBox="0 0 24 24" 
                   fill="currentColor"
                 >
@@ -165,8 +165,8 @@ export const HeroTitleLogo: React.FC<HeroTitleLogoProps> = ({
               }}
               title="Mixed Signals Official Emblem"
             >
-              {/* Responsive Size: Scaled significantly to be the commanding centerpiece */}
-              <div className="w-[140px] h-[140px] sm:w-[190px] sm:h-[190px] md:w-[240px] md:h-[240px] lg:w-[280px] lg:h-[280px] xl:w-[320px] xl:h-[320px] 2xl:w-[360px] 2xl:h-[360px] flex items-center justify-center">
+              {/* Responsive Size: Perfectly proportioned across all screen sizes */}
+              <div className="w-[72px] h-[72px] xs:w-[96px] xs:h-[96px] sm:w-[170px] sm:h-[170px] md:w-[220px] md:h-[220px] lg:w-[280px] lg:h-[280px] xl:w-[320px] xl:h-[320px] 2xl:w-[360px] 2xl:h-[360px] flex items-center justify-center">
                 <MixedSignalsEmblem 
                   size="100%" 
                   themeAccent={themeAccent} 
@@ -192,7 +192,7 @@ export const HeroTitleLogo: React.FC<HeroTitleLogoProps> = ({
               }}
             >
               {/* Main Wordmark "SIGNALS." */}
-              <div className="relative inline-flex items-baseline font-bodoni-custom font-black tracking-[-0.01em] text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] 2xl:text-[6.5rem] leading-none uppercase whitespace-nowrap">
+              <div className="relative inline-flex items-baseline font-bodoni-custom font-black tracking-[-0.01em] text-2xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] 2xl:text-[6.5rem] leading-none uppercase whitespace-nowrap">
                 
                 {/* S */}
                 <span className="logo-gold-letter">S</span>

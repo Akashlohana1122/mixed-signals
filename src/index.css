@@ -770,6 +770,46 @@
   will-change: transform;
 }
 
+/* ========================================================================= */
+/* MOBILE & RESPONSIVE TOUCH TARGET / NO-OVERFLOW / PRESET CAROUSEL RULES     */
+/* (Scoped strictly to <1024px, leaving desktop >=1024px completely untouched)*/
+/* ========================================================================= */
+
+/* Horizontal scroll styling for mobile preset carousel (zero horizontal page bar) */
+.mobile-preset-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  padding-bottom: 8px;
+}
+
+.mobile-preset-carousel::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.mobile-preset-carousel > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* Minimum comfortable touch targets on touch surfaces */
+@media (max-width: 1023px) {
+  .touch-target-comfort {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Prevent horizontal document blowout on mobile viewports */
+  body, #root {
+    overflow-x: hidden;
+    width: 100%;
+  }
+}
+
+
 
 
 

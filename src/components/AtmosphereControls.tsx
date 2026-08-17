@@ -131,7 +131,7 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
         }}
       >
         {/* Left Section: Visual & Mode Toggles */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center flex-wrap gap-1">
           {/* D3 Spectrum Visualizer Mode Toggle */}
           {onToggleVisualizerMode && (
             <button
@@ -139,7 +139,7 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
                 ambientAudio.playTunerClick();
                 onToggleVisualizerMode();
               }}
-              className={`px-2.5 py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1.5 transition-all cursor-pointer border ${
+              className={`min-h-[40px] sm:min-h-0 px-2.5 py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1.5 transition-all cursor-pointer border ${
                 isVisualizerMode
                   ? 'bg-white/15 text-white border-white/40 shadow-sm font-bold'
                   : 'bg-black/30 hover:bg-white/10 text-white/70 border-white/10'
@@ -147,7 +147,7 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
               title="Toggle D3 Frequency Visualizer / Retro Boombox View"
             >
               <Activity className="w-3.5 h-3.5" style={{ color: activeTheme.accentColor }} />
-              <span className="hidden sm:inline">{isVisualizerMode ? 'BOOMBOX' : 'SPECTRUM'}</span>
+              <span className="inline">{isVisualizerMode ? 'BOOMBOX' : 'SPECTRUM'}</span>
             </button>
           )}
 
@@ -158,11 +158,11 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
                 ambientAudio.playTunerClick();
                 onShuffleWallpaper();
               }}
-              className="px-2.5 py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1.5 transition-all cursor-pointer bg-black/30 hover:bg-white/10 text-white/80 border border-white/10 hover:border-white/20 active:scale-95"
+              className="min-h-[40px] sm:min-h-0 px-2.5 py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1.5 transition-all cursor-pointer bg-black/30 hover:bg-white/10 text-white/80 border border-white/10 hover:border-white/20 active:scale-95"
               title="Switch Random Aesthetic Wallpaper"
             >
               <ImageIcon className="w-3.5 h-3.5" style={{ color: activeTheme.accentColor }} />
-              <span className="hidden sm:inline">SCENE</span>
+              <span className="inline">SCENE</span>
             </button>
           )}
 
@@ -173,12 +173,12 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
                 ambientAudio.playTunerClick();
                 onOpenWeatherModal();
               }}
-              className="px-2.5 py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1.5 transition-all cursor-pointer bg-black/30 hover:bg-white/10 text-white/80 border border-white/10 hover:border-white/20"
+              className="min-h-[40px] sm:min-h-0 px-2.5 py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1.5 transition-all cursor-pointer bg-black/30 hover:bg-white/10 text-white/80 border border-white/10 hover:border-white/20"
               title="Atmospheric Weather Controls"
             >
               <CloudSun className="w-3.5 h-3.5 text-sky-400" />
-              <span className="hidden sm:inline">
-                {weatherTone ? `${weatherTone.temperatureC}°C` : 'WEATHER'}
+              <span className="hidden xs:inline">
+                {weatherTone ? `${weatherTone.temperatureC}°` : 'WEATHER'}
               </span>
             </button>
           )}
@@ -190,17 +190,17 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
                 ambientAudio.playTunerClick();
                 onOpenSpotifyModal();
               }}
-              className="px-2.5 py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1.5 transition-all cursor-pointer bg-[#1DB954]/10 hover:bg-[#1DB954]/20 border border-[#1DB954]/30 text-[#1DB954]"
+              className="min-h-[40px] sm:min-h-0 px-2.5 py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1.5 transition-all cursor-pointer bg-[#1DB954]/10 hover:bg-[#1DB954]/20 border border-[#1DB954]/30 text-[#1DB954]"
               title="Spotify Playlist Sync"
             >
               <Music2 className="w-3.5 h-3.5 fill-current" />
-              <span className="hidden sm:inline">SPOTIFY</span>
+              <span className="hidden xs:inline">SPOTIFY</span>
             </button>
           )}
         </div>
 
         {/* Right Section: Compact Audio/FX Switches */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center flex-wrap gap-1">
           {/* Rain Toggle & Mixer Quick Expander */}
           <div className="flex items-center">
             <button
@@ -212,7 +212,7 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
                   setShowRainMixer(true);
                 }
               }}
-              className={`p-1.5 sm:px-2.5 sm:py-1.5 rounded-l-xl text-[11px] font-mono-custom flex items-center gap-1.5 transition-all cursor-pointer border ${
+              className={`min-h-[40px] sm:min-h-0 px-2.5 py-1.5 rounded-l-xl text-[11px] font-mono-custom flex items-center gap-1.5 transition-all cursor-pointer border ${
                 settings.rainAmbience
                   ? 'border-sky-500/50 bg-sky-500/20 text-sky-300 shadow-[0_0_12px_rgba(56,189,248,0.35)] font-bold'
                   : 'border-white/10 bg-black/20 text-white/40 hover:text-white'
@@ -220,9 +220,9 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
               title="Toggle Rain Ambience"
             >
               <CloudRain className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">RAIN</span>
+              <span className="inline">RAIN</span>
               {settings.rainAmbience && (
-                <span className="text-[9px] px-1 py-0.2 rounded bg-sky-400/20 text-sky-200 uppercase font-mono">
+                <span className="text-[9px] px-1 py-0.2 rounded bg-sky-400/20 text-sky-200 uppercase font-mono hidden xs:inline">
                   {currentIntensity}
                 </span>
               )}
@@ -232,7 +232,7 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
                 ambientAudio.playTunerClick();
                 setShowRainMixer(!showRainMixer);
               }}
-              className={`p-1.5 sm:px-1.5 sm:py-1.5 rounded-r-xl text-[11px] border-y border-r transition-all cursor-pointer ${
+              className={`min-h-[40px] sm:min-h-0 px-2 py-1.5 rounded-r-xl text-[11px] border-y border-r transition-all cursor-pointer ${
                 settings.rainAmbience
                   ? 'border-sky-500/50 bg-sky-500/30 text-sky-200 hover:bg-sky-500/40'
                   : 'border-white/10 bg-black/30 text-white/40 hover:text-white'
@@ -250,7 +250,7 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
               ambientAudio.playTunerClick();
               onToggleTapeHiss();
             }}
-            className={`p-1.5 sm:px-2 sm:py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1 transition-all cursor-pointer border ${
+            className={`min-h-[40px] sm:min-h-0 px-2.5 py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1 transition-all cursor-pointer border ${
               settings.tapeHiss
                 ? 'border-emerald-500/50 bg-emerald-500/20 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.35)] font-bold'
                 : 'border-white/10 bg-black/20 text-white/40 hover:text-white'
@@ -258,7 +258,7 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
             title="Analog Tape Warmth"
           >
             <Disc3 className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">TAPE</span>
+            <span className="inline">TAPE</span>
           </button>
 
           {/* CRT Scan */}
@@ -267,7 +267,7 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
               ambientAudio.playTunerClick();
               onToggleScanlines();
             }}
-            className={`p-1.5 sm:px-2 sm:py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1 transition-all cursor-pointer border ${
+            className={`min-h-[40px] sm:min-h-0 px-2.5 py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1 transition-all cursor-pointer border ${
               settings.scanlines
                 ? 'border-amber-500/50 bg-amber-500/15 text-amber-300 shadow-sm'
                 : 'border-white/10 bg-black/20 text-white/40 hover:text-white'
@@ -275,7 +275,7 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
             title="CRT Scanlines Texture"
           >
             <Tv className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">CRT</span>
+            <span className="inline">CRT</span>
           </button>
 
           {/* Night Drive Mode */}
@@ -284,7 +284,7 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
               ambientAudio.playTunerClick();
               onToggleNightDrive();
             }}
-            className={`p-1.5 sm:px-2 sm:py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1 transition-all cursor-pointer border ${
+            className={`min-h-[40px] sm:min-h-0 px-2.5 py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1 transition-all cursor-pointer border ${
               settings.nightDriveMode
                 ? 'border-violet-500/50 bg-violet-500/15 text-violet-300 shadow-sm'
                 : 'border-white/10 bg-black/20 text-white/40 hover:text-white'
@@ -292,13 +292,13 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
             title="Night Drive Immersion"
           >
             <Moon className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">DARK</span>
+            <span className="inline">DARK</span>
           </button>
 
           {/* Share Button */}
           <button
             onClick={handleShare}
-            className={`p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1 transition-all cursor-pointer border ${
+            className={`min-h-[40px] sm:min-h-0 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] font-mono-custom flex items-center gap-1 transition-all cursor-pointer border ${
               copied
                 ? 'bg-white text-black font-bold border-white'
                 : 'bg-white/10 hover:bg-white/20 text-white border-white/15'
@@ -306,7 +306,7 @@ export const AtmosphereControls: React.FC<AtmosphereControlsProps> = ({
             title="Share Signal Link"
           >
             {copied ? <Check className="w-3.5 h-3.5" /> : <Share2 className="w-3.5 h-3.5" />}
-            <span className="hidden sm:inline">{copied ? 'COPIED' : 'SHARE'}</span>
+            <span className="inline">{copied ? 'COPIED' : 'SHARE'}</span>
           </button>
         </div>
       </div>

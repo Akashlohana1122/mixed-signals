@@ -95,19 +95,213 @@ export const PlayerBar: React.FC<PlayerBarProps> = ({
   ];
 
   return (
-    <footer className="fixed bottom-2.5 sm:bottom-3 md:bottom-4 left-2 sm:left-4 md:left-6 right-2 sm:right-4 md:right-6 z-40 max-w-7xl mx-auto select-none pointer-events-auto transition-all duration-500">
+    <footer className="fixed bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-4 md:left-6 right-2 sm:right-4 md:right-6 z-40 max-w-7xl mx-auto select-none pointer-events-auto transition-all duration-500">
       
       {/* Outer ambient theme glow aura - powered by dynamic CSS variable */}
       <div 
-        className="absolute -inset-1 rounded-2xl sm:rounded-full blur-xl opacity-40 pointer-events-none transition-all duration-700"
+        className="absolute -inset-1 rounded-2xl md:rounded-full blur-xl opacity-40 pointer-events-none transition-all duration-700"
         style={{
           backgroundColor: 'var(--theme-glow, rgba(6, 182, 212, 0.4))',
         }}
       />
 
-      {/* Main Glassmorphic Capsule Enclosure with fluid responsive padding & stable heights */}
+      {/* ========================================================================= */}
+      {/* 1. MOBILE-DEDICATED COMPACT VERTICAL-STACK PLAYER (Viewports < 768px)    */}
+      {/* ========================================================================= */}
       <div 
-        className="relative bg-[#0A0B12]/94 backdrop-blur-2xl border rounded-2xl sm:rounded-full px-2.5 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-2.5 flex flex-col md:flex-row items-center justify-between gap-2 sm:gap-2.5 md:gap-3 lg:gap-4 shadow-[0_15px_40px_rgba(0,0,0,0.88)] transition-all duration-500 min-h-[58px] sm:min-h-[62px]"
+        className="block md:hidden relative bg-[#0A0B12]/95 backdrop-blur-2xl border rounded-2xl p-2.5 shadow-[0_12px_35px_rgba(0,0,0,0.92)] transition-all duration-300"
+        style={{
+          borderColor: 'var(--theme-border-glow, rgba(6, 182, 212, 0.35))',
+          boxShadow: `0 12px 35px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.12), 0 0 16px var(--theme-glow, ${activeTheme.glowColor})`,
+        }}
+      >
+        {/* Top Row: Artwork Thumbnail + Track Title & Status */}
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div 
+            className="w-10 h-10 rounded-lg overflow-hidden border shadow-md bg-[#14141E] shrink-0"
+            style={{
+              borderColor: 'var(--theme-accent, #06B6D4)',
+              boxShadow: '0 0 10px var(--theme-glow, rgba(6, 182, 212, 0.3))',
+            }}
+          >
+            <img 
+              src={track.id ? `https://img.youtube.com/vi/${track.id}/hqdefault.jpg` : activeTheme.image} 
+              alt={track.title || 'Track Artwork'}
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = activeTheme.image;
+              }}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <span 
+                className="w-1.5 h-1.5 rounded-full shrink-0"
+                style={{ 
+                  backgroundColor: 'var(--theme-accent, #06B6D4)',
+                  boxShadow: '0 0 6px var(--theme-accent, #06B6D4)',
+                }}
+              />
+              <span 
+                className="text-[9px] font-digital-custom font-bold tracking-wider uppercase truncate"
+                style={{ color: 'var(--theme-accent, #06B6D4)' }}
+              >
+                {track.isPlaying ? 'SIGNAL LOCKED' : 'SIGNAL STANDBY'}
+              </span>
+            </div>
+            <h4 
+              className="text-[12px] font-semibold text-white truncate font-sans drop-shadow-sm mt-0.5 leading-tight"
+              title={track.title}
+            >
+              {track.title || 'SIGNAL_SEARCHING_ATMOSPHERE'}
+            </h4>
+            <p className="text-[9px] font-mono-custom text-[#A0A0B2] uppercase tracking-wider truncate">
+              {activeTheme.name.toUpperCase()} <span className="text-white/30">/</span> {activeTheme.genreTag.split('/')[0] || 'DRIVE'}
+            </p>
+          </div>
+
+          {/* Quick Spotify / Options buttons on top-right */}
+          <div className="flex items-center gap-1 shrink-0">
+            {onToggleSpotifySave && (
+              <button
+                onClick={onToggleSpotifySave}
+                className="min-h-[36px] min-w-[36px] flex items-center justify-center p-1.5 rounded-full text-white/60 hover:text-white cursor-pointer active:scale-95"
+                title="Save track to Spotify"
+              >
+                <Heart 
+                  className={`w-4 h-4 transition-all ${
+                    isSpotifySaved 
+                      ? 'fill-[#1DB954] text-[#1DB954] drop-shadow-[0_0_8px_rgba(29,185,84,0.7)]' 
+                      : ''
+                  }`} 
+                />
+              </button>
+            )}
+            {onOpenSpotifyModal && (
+              <button
+                onClick={onOpenSpotifyModal}
+                className="min-h-[36px] min-w-[36px] flex items-center justify-center p-1.5 text-white/50 hover:text-white cursor-pointer"
+                title="Station Broadcast / Spotify Deck"
+              >
+                <MoreVertical className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Middle Row: Roomy, Comfortable Interactive Controls (Minimum 44x44px touch targets) */}
+        <div className="flex items-center justify-between mt-2 pt-1 border-t border-white/5 px-1">
+          {/* Left: Shuffle & Mute */}
+          <div className="flex items-center gap-1">
+            <button
+              onClick={onToggleShuffle}
+              title="Shuffle Playlist"
+              className={`min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg transition-all cursor-pointer ${
+                isShuffle ? 'text-white' : 'text-white/50'
+              }`}
+              style={{ color: isShuffle ? 'var(--theme-accent, #06B6D4)' : undefined }}
+            >
+              <Shuffle className="w-4 h-4" />
+            </button>
+            <button
+              onClick={onToggleMute}
+              title={isMuted ? 'Unmute' : 'Mute'}
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-white/60 hover:text-white cursor-pointer"
+            >
+              {isMuted || volume === 0 ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+            </button>
+          </div>
+
+          {/* Center: Primary Playback Group (REW, PLAY/PAUSE, FWD) */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onPrevious}
+              title="Previous Signal"
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full text-white/80 hover:text-white active:scale-90 transition-all cursor-pointer bg-white/5"
+            >
+              <SkipBack className="w-4.5 h-4.5 fill-current" />
+            </button>
+
+            <button
+              onClick={onPlayPause}
+              title={track.isPlaying ? 'Pause' : 'Play'}
+              className="min-h-[46px] min-w-[46px] rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95 border"
+              style={{
+                borderColor: 'var(--theme-accent, #06B6D4)',
+                backgroundColor: 'var(--theme-accent-soft, rgba(6, 182, 212, 0.25))',
+                boxShadow: '0 0 16px var(--theme-glow, rgba(6, 182, 212, 0.45)), inset 0 0 8px var(--theme-glow, rgba(6, 182, 212, 0.4))',
+              }}
+            >
+              {track.isPlaying ? (
+                <Pause className="w-4.5 h-4.5" style={{ color: 'var(--theme-accent, #06B6D4)', fill: 'var(--theme-accent, #06B6D4)' }} />
+              ) : (
+                <Play className="w-4.5 h-4.5 ml-0.5" style={{ color: 'var(--theme-accent, #06B6D4)', fill: 'var(--theme-accent, #06B6D4)' }} />
+              )}
+            </button>
+
+            <button
+              onClick={onNext}
+              title="Next Signal"
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full text-white/80 hover:text-white active:scale-90 transition-all cursor-pointer bg-white/5"
+            >
+              <SkipForward className="w-4.5 h-4.5 fill-current" />
+            </button>
+          </div>
+
+          {/* Right: Repeat & Volume Level Badge */}
+          <div className="flex items-center gap-1">
+            <button
+              onClick={onToggleRepeat}
+              title="Repeat Track"
+              className={`min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg transition-all cursor-pointer ${
+                isRepeat ? 'text-white' : 'text-white/50'
+              }`}
+              style={{ color: isRepeat ? 'var(--theme-accent, #06B6D4)' : undefined }}
+            >
+              <Repeat className="w-4 h-4" />
+            </button>
+            <span className="text-[10px] font-digital-custom text-white/70 tabular-nums w-8 text-center">
+              {isMuted ? '0%' : `${volume}%`}
+            </span>
+          </div>
+        </div>
+
+        {/* Bottom Row: Smooth Interactive Seek Track with Timestamps */}
+        <div className="mt-1 px-1">
+          <div className="flex items-center justify-between text-[9px] font-digital-custom text-white/70 mb-1">
+            <span className="text-white/90">{formatTime(track.currentTime)}</span>
+            <span>{track.duration > 0 ? formatTime(track.duration) : '--:--'}</span>
+          </div>
+          <div className="relative flex items-center h-4 group cursor-pointer">
+            <div className="absolute inset-x-0 h-1.5 bg-white/15 rounded-full overflow-hidden pointer-events-none">
+              <div 
+                className="h-full rounded-full transition-all duration-100"
+                style={{ 
+                  width: `${currentProgressPct}%`,
+                  backgroundColor: 'var(--theme-accent, #06B6D4)',
+                  boxShadow: '0 0 8px var(--theme-accent, #06B6D4)',
+                }}
+              />
+            </div>
+            <input
+              type="range"
+              min="0"
+              max={track.duration || 100}
+              value={track.currentTime}
+              onChange={handleSliderChange}
+              className="w-full h-4 opacity-0 cursor-pointer appearance-none block absolute inset-0 z-20"
+              aria-label="Seek track position"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* ========================================================================= */}
+      {/* 2. DESKTOP CAPSULE MEDIA PLAYER (Preserved exactly at >= 768px)          */}
+      {/* ========================================================================= */}
+      <div 
+        className="hidden md:flex relative bg-[#0A0B12]/94 backdrop-blur-2xl border rounded-full px-4 md:px-5 lg:px-6 py-2.5 items-center justify-between gap-3 lg:gap-4 shadow-[0_15px_40px_rgba(0,0,0,0.88)] transition-all duration-500 min-h-[62px]"
         style={{
           borderColor: 'var(--theme-border-glow, rgba(6, 182, 212, 0.35))',
           boxShadow: `0 15px 40px rgba(0,0,0,0.85), inset 0 1px 1px rgba(255,255,255,0.15), 0 0 20px var(--theme-glow, ${activeTheme.glowColor})`,
@@ -115,7 +309,7 @@ export const PlayerBar: React.FC<PlayerBarProps> = ({
       >
 
         {/* ================= LEFT SECTION: Vinyl Record + Artwork + Title Meta (Strictly clamped width for theme stability) ================= */}
-        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 w-full md:w-auto md:max-w-[210px] lg:max-w-[290px] xl:max-w-[360px] shrink flex-1">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 md:max-w-[210px] lg:max-w-[290px] xl:max-w-[360px] shrink flex-1">
           
           {/* Vinyl Record slipping out behind cover sleeve */}
           <div className="relative shrink-0 flex items-center">
@@ -459,23 +653,6 @@ export const PlayerBar: React.FC<PlayerBarProps> = ({
           )}
         </div>
 
-      </div>
-
-      {/* Mobile-only compact scrub bar under capsule */}
-      <div className="block lg:hidden mt-1 px-3">
-        <div className="flex items-center justify-between text-[9px] font-digital-custom text-white/70 mb-0.5">
-          <span>{formatTime(track.currentTime)}</span>
-          <span>{track.duration > 0 ? formatTime(track.duration) : '--:--'}</span>
-        </div>
-        <input
-          type="range"
-          min="0"
-          max={track.duration || 100}
-          value={track.currentTime}
-          onChange={handleSliderChange}
-          className="w-full h-1 bg-white/20 rounded-full cursor-pointer appearance-none block"
-          style={{ accentColor: 'var(--theme-accent, #06B6D4)' }}
-        />
       </div>
 
     </footer>

@@ -57,8 +57,8 @@ export const ThemeVibeDeck: React.FC<ThemeVibeDeckProps> = ({
         </span>
       </div>
 
-      {/* Visual Themes Carousel Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
+      {/* Visual Themes Carousel / Grid (Swipeable on mobile, grid on desktop) */}
+      <div className="mobile-preset-carousel sm:grid sm:grid-cols-3 lg:grid-cols-5 gap-3.5 pb-2 sm:pb-0">
         {themes.map((theme, index) => {
           const isActive = theme.id === activeTheme.id;
           const isTransitioning = transitioningThemeId === theme.id;
@@ -68,7 +68,7 @@ export const ThemeVibeDeck: React.FC<ThemeVibeDeckProps> = ({
             <button
               key={theme.id}
               onClick={() => handleThemeClick(theme)}
-              className={`group relative flex flex-col rounded-xl overflow-hidden border text-left transition-all duration-500 cursor-pointer ${
+              className={`group relative flex flex-col rounded-xl overflow-hidden border text-left transition-all duration-500 cursor-pointer w-[72vw] xs:w-[62vw] sm:w-auto shrink-0 ${
                 isActive
                   ? 'scale-[1.02] shadow-2xl border-opacity-100 bg-[#14141E]/95'
                   : 'border-[#22222E]/90 hover:border-[#3E3E52] bg-[#101017]/80 hover:bg-[#151520] opacity-80 hover:opacity-100 hover:scale-[1.01]'

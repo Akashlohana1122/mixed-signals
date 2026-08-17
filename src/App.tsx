@@ -1058,130 +1058,125 @@ export default function App() {
       />
 
       {/* Top Bar (Single row contract: Brand / Real-time clock — Welcome & Listeners Pill — Action Controls) */}
-      <header className="relative z-30 w-full border-b border-[#1C1C28]/80 bg-[#09090D]/70 backdrop-blur-lg px-4 sm:px-8 py-3.5 flex items-center justify-between">
+      <header className="relative z-30 w-full border-b border-[#1C1C28]/80 bg-[#09090D]/80 backdrop-blur-xl px-2.5 sm:px-6 md:px-8 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 select-none">
         
-        {/* Left Zone: Live Real-Time Clock + Break Sleep Timer + Brand Wordmark */}
-        <div className="flex items-center gap-3 sm:gap-5 select-none">
-          {/* Live Clock & Break Mode Pill with Precision Glow and Microsecond BPM Pulse */}
-          <div className="flex items-center gap-2">
-            <div 
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#11111A]/95 border border-[#2B2B3E] shadow-inner font-digital-custom tracking-wider group transition-all"
-              style={{
-                borderColor: track.isPlaying ? `${activeTheme.accentColor}40` : '#2B2B3E',
-                boxShadow: track.isPlaying ? `0 0 14px ${activeTheme.glowColor}25` : undefined,
-              }}
-            >
-              <span className="text-[10px] font-bold text-[#888899] uppercase tracking-widest hidden xs:inline">
-                {liveTime.dayName || 'LIVE'}
-              </span>
-              <div className="flex items-baseline gap-0.5 text-xs sm:text-sm font-bold text-white font-digital-custom tracking-wider">
-                <span className="tabular-nums font-semibold">{liveTime.hours}</span>
-                <span className="text-white/60 animate-pulse font-bold">:</span>
-                <span className="tabular-nums font-semibold">{liveTime.minutes}</span>
-                <span className="text-white/40 font-bold">:</span>
-                <span className="text-white/90 tabular-nums font-semibold">{liveTime.seconds}</span>
-                
-                {/* Subtle, high-performance retro fixed-width microsecond pulsing telemetry */}
-                <span 
-                  className="text-[10px] font-digital-custom tabular-nums font-bold ml-1 px-1.5 py-0.5 rounded bg-black/50 border border-white/10 transition-opacity"
-                  style={{
-                    color: activeTheme.accentColor,
-                    textShadow: track.isPlaying ? `0 0 8px ${activeTheme.accentColor}80` : undefined,
-                    opacity: track.isPlaying ? 0.9 : 0.6,
-                  }}
-                  title="Real-time precision centiseconds telemetry"
-                >
-                  .{liveTime.micro}
-                </span>
-
-                <span className="text-[9.5px] font-bold uppercase ml-1 font-digital-custom tracking-normal" style={{ color: activeTheme.accentColor }}>
-                  {liveTime.ampm}
-                </span>
-              </div>
-            </div>
-
-            {/* Break / Sleep Timer Dropdown Trigger */}
-            <div className="relative">
-              <button
-                onClick={() => setIsSleepMenuOpen((prev) => !prev)}
-                className={`px-2.5 py-1.5 rounded-lg text-xs font-digital-custom tracking-wide flex items-center gap-1.5 transition-all cursor-pointer border ${
-                  sleepSecondsLeft !== null
-                    ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-[0_0_12px_rgba(16,185,129,0.35)] font-bold'
-                    : 'text-white/70 hover:text-white border-[#2B2B3E] hover:border-white/30 bg-[#11111A]/95'
-                }`}
-                style={{
-                  borderColor: sleepSecondsLeft !== null ? undefined : (track.isPlaying ? `${activeTheme.accentColor}40` : '#2B2B3E'),
-                  boxShadow: sleepSecondsLeft === null && track.isPlaying ? `0 0 10px ${activeTheme.glowColor}18` : undefined,
-                }}
-                title="Sleep / Focus Break Timer"
-              >
-                <Timer className="w-3.5 h-3.5" style={{ color: sleepSecondsLeft !== null ? '#34D399' : activeTheme.accentColor }} />
-                <span className="tabular-nums font-semibold uppercase">{formattedSleepTimer ? formattedSleepTimer : 'BREAK'}</span>
-                <ChevronDown className="w-3 h-3 opacity-60" />
-              </button>
-
-              {/* Sleep Timer Options Menu */}
-              {isSleepMenuOpen && (
-                <div 
-                  className="absolute top-full left-0 mt-2 w-48 bg-[#121218]/95 backdrop-blur-xl border border-[#2A2A38] rounded-xl shadow-2xl p-1.5 z-50 animate-fade-in"
-                  onClick={() => setIsSleepMenuOpen(false)}
-                >
-                  <div className="px-2.5 py-1 text-[9.5px] font-digital-custom text-[#888] uppercase tracking-wider border-b border-white/10 mb-1">
-                    FOCUS / BREAK TIMER
-                  </div>
-                  {[
-                    { label: 'Off / None', mins: null },
-                    { label: '15 Minutes', mins: 15 },
-                    { label: '30 Minutes', mins: 30 },
-                    { label: '45 Minutes', mins: 45 },
-                    { label: '60 Minutes', mins: 60 },
-                  ].map((opt) => (
-                    <button
-                      key={opt.label}
-                      onClick={() => setSleepTimer(opt.mins)}
-                      className="w-full text-left px-2.5 py-1.5 rounded-md text-xs font-digital-custom tracking-wide hover:bg-white/10 text-white/80 hover:text-white flex items-center justify-between cursor-pointer transition-colors"
-                    >
-                      <span>{opt.label}</span>
-                      {((opt.mins === null && sleepSecondsLeft === null) ||
-                        (opt.mins !== null && sleepSecondsLeft !== null && Math.ceil(sleepSecondsLeft / 60) === opt.mins)) && (
-                        <Check className="w-3 h-3 text-emerald-400" />
-                      )}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="hidden md:block w-px h-4 bg-white/15" />
-
-          {/* Brand Wordmark with secret triple-click for owner */}
+        {/* Left Zone: Brand Wordmark (Always cleanly displayed & never clipped) */}
+        <div className="flex items-center gap-2 sm:gap-4 shrink-0">
           <div 
             onClick={handleSecretBrandClick}
             title="Triple-click for Station Owner Secret Admin Console"
-            className="flex items-center gap-2.5 cursor-pointer group"
+            className="flex items-center gap-2 sm:gap-2.5 cursor-pointer group"
           >
-            <div className="relative">
-              <MixedSignalsEmblem size={28} themeAccent={activeTheme.accentColor} glow={false} />
+            <div className="relative shrink-0">
+              <MixedSignalsEmblem size={26} themeAccent={activeTheme.accentColor} glow={false} />
               <span 
                 className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border border-black transition-transform ${track.isPlaying ? 'animate-ping' : 'opacity-80'}`}
                 style={{ backgroundColor: activeTheme.accentColor }} 
               />
             </div>
-            <div className="flex flex-col">
-              <span className="font-display-custom text-base sm:text-lg font-black tracking-widest text-[#E4E3E0] uppercase whitespace-nowrap group-hover:text-white transition-colors leading-none">
+            <div className="flex flex-col min-w-0">
+              <span className="font-display-custom text-sm sm:text-base md:text-lg font-black tracking-wider sm:tracking-widest text-[#E4E3E0] uppercase whitespace-nowrap group-hover:text-white transition-colors leading-tight">
                 MIXED SIGNALS
               </span>
-              <span className="text-[9.5px] font-mono-custom font-bold text-cyan-400 uppercase tracking-[0.25em] mt-0.5 group-hover:text-cyan-300 transition-colors">
+              <span className="text-[8px] sm:text-[9.5px] font-mono-custom font-bold text-cyan-400 uppercase tracking-[0.15em] sm:tracking-[0.25em] leading-tight group-hover:text-cyan-300 transition-colors whitespace-nowrap">
                 MADE BY AKASH KUMAR
               </span>
             </div>
           </div>
         </div>
 
-        {/* Center Zone: Dynamic Listening Mode Interactive Pill + Live Online Listeners Badge */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Synchronized Station Listening Mode Pill (interactive cycle on click) */}
+        {/* Center Zone: Live Real-Time Clock + Break Sleep Timer (Visible on all screens, compact on mobile) */}
+        <div className="flex items-center gap-1.5 sm:gap-3">
+          {/* Live Clock with Precision Glow */}
+          <div 
+            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-[#11111A]/95 border border-[#2B2B3E] shadow-inner font-digital-custom tracking-wider group transition-all shrink-0"
+            style={{
+              borderColor: track.isPlaying ? `${activeTheme.accentColor}40` : '#2B2B3E',
+              boxShadow: track.isPlaying ? `0 0 14px ${activeTheme.glowColor}25` : undefined,
+            }}
+          >
+            <span className="text-[10px] font-bold text-[#888899] uppercase tracking-widest hidden md:inline">
+              {liveTime.dayName || 'LIVE'}
+            </span>
+            <div className="flex items-baseline gap-0.5 text-[11px] sm:text-xs md:text-sm font-bold text-white font-digital-custom tracking-wider">
+              <span className="tabular-nums font-semibold">{liveTime.hours}</span>
+              <span className="text-white/60 animate-pulse font-bold">:</span>
+              <span className="tabular-nums font-semibold">{liveTime.minutes}</span>
+              <span className="text-white/40 font-bold hidden xs:inline">:</span>
+              <span className="text-white/90 tabular-nums font-semibold hidden xs:inline">{liveTime.seconds}</span>
+              
+              {/* Microsecond pulse */}
+              <span 
+                className="text-[9px] sm:text-[10px] font-digital-custom tabular-nums font-bold ml-0.5 sm:ml-1 px-1 sm:px-1.5 py-0.5 rounded bg-black/50 border border-white/10 transition-opacity hidden sm:inline"
+                style={{
+                  color: activeTheme.accentColor,
+                  textShadow: track.isPlaying ? `0 0 8px ${activeTheme.accentColor}80` : undefined,
+                  opacity: track.isPlaying ? 0.9 : 0.6,
+                }}
+                title="Real-time precision centiseconds telemetry"
+              >
+                .{liveTime.micro}
+              </span>
+
+              <span className="text-[8.5px] sm:text-[9.5px] font-bold uppercase ml-0.5 sm:ml-1 font-digital-custom tracking-normal" style={{ color: activeTheme.accentColor }}>
+                {liveTime.ampm}
+              </span>
+            </div>
+          </div>
+
+          {/* Break / Sleep Timer Dropdown Trigger */}
+          <div className="relative">
+            <button
+              onClick={() => setIsSleepMenuOpen((prev) => !prev)}
+              className={`touch-target-comfort-h px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-digital-custom tracking-wide flex items-center gap-1 sm:gap-1.5 transition-all cursor-pointer border ${
+                sleepSecondsLeft !== null
+                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-[0_0_12px_rgba(16,185,129,0.35)] font-bold'
+                  : 'text-white/70 hover:text-white border-[#2B2B3E] hover:border-white/30 bg-[#11111A]/95'
+              }`}
+              style={{
+                borderColor: sleepSecondsLeft !== null ? undefined : (track.isPlaying ? `${activeTheme.accentColor}40` : '#2B2B3E'),
+                boxShadow: sleepSecondsLeft === null && track.isPlaying ? `0 0 10px ${activeTheme.glowColor}18` : undefined,
+              }}
+              title="Sleep / Focus Break Timer"
+            >
+              <Timer className="w-3 h-3 sm:w-3.5 sm:h-3.5" style={{ color: sleepSecondsLeft !== null ? '#34D399' : activeTheme.accentColor }} />
+              <span className="tabular-nums font-semibold uppercase hidden xs:inline">{formattedSleepTimer ? formattedSleepTimer : 'BREAK'}</span>
+              <ChevronDown className="w-2.5 h-2.5 sm:w-3 sm:h-3 opacity-60" />
+            </button>
+
+            {/* Sleep Timer Options Menu */}
+            {isSleepMenuOpen && (
+              <div 
+                className="absolute top-full right-0 sm:left-0 mt-2 w-48 bg-[#121218]/95 backdrop-blur-xl border border-[#2A2A38] rounded-xl shadow-2xl p-1.5 z-50 animate-fade-in"
+                onClick={() => setIsSleepMenuOpen(false)}
+              >
+                <div className="px-2.5 py-1 text-[9.5px] font-digital-custom text-[#888] uppercase tracking-wider border-b border-white/10 mb-1">
+                  FOCUS / BREAK TIMER
+                </div>
+                {[
+                  { label: 'Off / None', mins: null },
+                  { label: '15 Minutes', mins: 15 },
+                  { label: '30 Minutes', mins: 30 },
+                  { label: '45 Minutes', mins: 45 },
+                  { label: '60 Minutes', mins: 60 },
+                ].map((opt) => (
+                  <button
+                    key={opt.label}
+                    onClick={() => setSleepTimer(opt.mins)}
+                    className="w-full text-left px-2.5 py-1.5 rounded-md text-xs font-digital-custom tracking-wide hover:bg-white/10 text-white/80 hover:text-white flex items-center justify-between cursor-pointer transition-colors"
+                  >
+                    <span>{opt.label}</span>
+                    {((opt.mins === null && sleepSecondsLeft === null) ||
+                      (opt.mins !== null && sleepSecondsLeft !== null && Math.ceil(sleepSecondsLeft / 60) === opt.mins)) && (
+                      <Check className="w-3 h-3 text-emerald-400" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Synchronized Station Listening Mode Pill (Desktop / Tablet) */}
           {(() => {
             const currentModeObj = getListeningModeById(selectedListeningMode);
             const ModeIcon = currentModeObj.icon;
@@ -1203,8 +1198,8 @@ export default function App() {
             );
           })()}
 
-          {/* Live Transmission Badge */}
-          <div className="px-3 py-1 rounded-full bg-[#14141E]/80 border border-[#28283C] shadow-inner flex items-center gap-2 text-xs font-mono-custom">
+          {/* Live Transmission Badge (Hidden on mobile to prioritize clean layout) */}
+          <div className="hidden xl:flex px-3 py-1 rounded-full bg-[#14141E]/80 border border-[#28283C] shadow-inner items-center gap-2 text-xs font-mono-custom">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
@@ -1216,17 +1211,17 @@ export default function App() {
         </div>
 
         {/* Right Action Zone: Visualizer Mode + Fullscreen + Primary Play/Pause Button */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {/* Visualizer Mode Toggle */}
           <button
             onClick={() => {
               ambientAudio.playTunerClick();
               setIsVisualizerMode(!isVisualizerMode);
             }}
-            className="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white/75 hover:text-white transition-all cursor-pointer text-xs font-mono-custom flex items-center gap-1.5"
+            className="touch-target-comfort-h px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white/75 hover:text-white transition-all cursor-pointer text-[10px] sm:text-xs font-mono-custom flex items-center gap-1 sm:gap-1.5"
             title={isVisualizerMode ? 'Switch to Vintage Boombox View' : 'Switch to D3 Spectrum Visualizer'}
           >
-            <Activity className="w-3.5 h-3.5" style={{ color: activeTheme.accentColor }} />
+            <Activity className="w-3 h-3 sm:w-3.5 sm:h-3.5" style={{ color: activeTheme.accentColor }} />
             <span className="hidden sm:inline">{isVisualizerMode ? 'BOOMBOX' : 'SPECTRUM'}</span>
           </button>
 
@@ -1242,44 +1237,44 @@ export default function App() {
           {/* Broadcast Play / Pause Primary Action */}
           <button
             onClick={handlePlayPause}
-            className="px-4 sm:px-5 py-2 rounded-full text-xs font-mono-custom font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-lg active:scale-95 text-black"
+            className="touch-target-comfort-h px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-mono-custom font-bold flex items-center gap-1 sm:gap-1.5 transition-all cursor-pointer shadow-lg active:scale-95 text-black shrink-0"
             style={{
               backgroundColor: activeTheme.accentColor,
               boxShadow: `0 0 16px ${activeTheme.glowColor}`,
             }}
           >
-            {track.isPlaying ? <Pause className="w-3.5 h-3.5 fill-current" /> : <Play className="w-3.5 h-3.5 fill-current ml-0.5" />}
-            <span>{track.isPlaying ? 'PAUSE' : 'PRESS PLAY'}</span>
+            {track.isPlaying ? <Pause className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" /> : <Play className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current ml-0.5" />}
+            <span className="hidden xs:inline">{track.isPlaying ? 'PAUSE' : 'PLAY'}</span>
           </button>
         </div>
       </header>
 
       {/* Main Experience Hero Surface */}
-      <main className={`relative z-20 flex-1 flex flex-col items-center justify-center px-4 pt-3 sm:pt-5 pb-24 sm:pb-28 gap-2 sm:gap-3 transition-opacity duration-700 ${
+      <main className={`relative z-20 flex-1 flex flex-col items-center justify-center px-3 sm:px-4 pt-3 sm:pt-5 pb-36 sm:pb-28 gap-2 sm:gap-3 transition-opacity duration-700 ${
         atmosphere.nightDriveMode ? 'opacity-90' : 'opacity-100'
       }`}>
         
         {/* Giant Watermark Background Typography "MIXED" "SIGNALS" behind the player */}
-        <div className="absolute inset-0 flex items-center justify-between px-2 sm:px-12 pointer-events-none select-none overflow-hidden -z-10 opacity-30 sm:opacity-35">
-          <span className="font-display-custom text-[16vw] font-black tracking-tighter text-white/[0.12] leading-none">
+        <div className="absolute inset-0 flex items-center justify-between px-2 sm:px-12 pointer-events-none select-none overflow-hidden -z-10 opacity-20 sm:opacity-35">
+          <span className="font-display-custom text-[11vw] sm:text-[16vw] font-black tracking-tighter text-white/[0.08] sm:text-white/[0.12] leading-none">
             MIXED
           </span>
-          <span className="font-display-custom text-[16vw] font-black tracking-tighter text-white/[0.12] leading-none text-right">
+          <span className="font-display-custom text-[11vw] sm:text-[16vw] font-black tracking-tighter text-white/[0.08] sm:text-white/[0.12] leading-none text-right">
             SIGNALS
           </span>
         </div>
 
         {/* Editorial Hero Title Section */}
-        <div className="text-center max-w-6xl w-full mx-auto">
+        <div className="text-center max-w-6xl w-full mx-auto px-1 sm:px-4">
           
           {/* Micro Terminal Tags */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-0.5 rounded-full bg-[#121218]/65 border border-[#242436]/70 text-[11px] font-mono-custom text-[#888] mb-1.5 shadow-md backdrop-blur-md">
-            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: activeTheme.accentColor }} />
-            <span className="font-semibold" style={{ color: activeTheme.accentColor }}>SIGNAL 98.6 FM</span>
+          <div className="inline-flex items-center flex-wrap justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-0.5 rounded-full bg-[#121218]/65 border border-[#242436]/70 text-[9.5px] sm:text-[11px] font-mono-custom text-[#888] mb-1.5 shadow-md backdrop-blur-md max-w-full">
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse shrink-0" style={{ backgroundColor: activeTheme.accentColor }} />
+            <span className="font-semibold shrink-0" style={{ color: activeTheme.accentColor }}>SIGNAL 98.6 FM</span>
             <span className="text-white/20">|</span>
-            <span className="text-white/90 uppercase">{activeTheme.genreTag}</span>
+            <span className="text-white/90 uppercase truncate max-w-[120px] sm:max-w-none">{activeTheme.genreTag}</span>
             <span className="text-white/20">|</span>
-            <span className="text-cyan-400 font-bold uppercase">MADE BY AKASH KUMAR</span>
+            <span className="text-cyan-400 font-bold uppercase shrink-0">MADE BY AKASH KUMAR</span>
           </div>
 
           {/* Signature Dual-Tier Typography: Outlined Neon "MIXED" + Luxury Serif "SIGNALS." with Audio-Reactive Glow & Floating Drift */}
@@ -1468,7 +1463,7 @@ export default function App() {
 
       {/* Floating Signature Badge: "created by Akash Kumar | 🎵 [Song Title]" */}
       <div 
-        className="fixed bottom-20 sm:bottom-22 right-3 sm:right-8 z-30 flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#0E0E16]/85 backdrop-blur-xl border border-[#2B2B3E]/80 shadow-2xl hover:border-[#4B4B6E] hover:bg-[#12121E]/95 transition-all duration-300 group select-none pointer-events-auto max-w-[90vw] sm:max-w-md"
+        className="fixed bottom-28 sm:bottom-22 right-3 sm:right-8 z-30 flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#0E0E16]/85 backdrop-blur-xl border border-[#2B2B3E]/80 shadow-2xl hover:border-[#4B4B6E] hover:bg-[#12121E]/95 transition-all duration-300 group select-none pointer-events-auto max-w-[90vw] sm:max-w-md"
         style={{
           boxShadow: `0 8px 25px rgba(0,0,0,0.5), 0 0 15px ${activeTheme.glowColor}`,
         }}

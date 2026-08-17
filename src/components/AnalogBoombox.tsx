@@ -337,10 +337,10 @@ export const AnalogBoombox: React.FC<AnalogBoomboxProps> = ({
         </div>
 
         {/* Bottom Section: Tactile Mechanical Buttons & Knobs - Symmetrically Balanced & Fully Contained */}
-        <div className="mt-3 pt-2.5 border-t border-[#222230] flex flex-wrap items-center justify-between gap-2">
+        <div className="mt-3 pt-2.5 border-t border-[#222230] flex flex-col md:flex-row items-center justify-between gap-2.5 sm:gap-2">
           
-          {/* Main Mechanical Playback Transport Cluster */}
-          <div className="flex items-center flex-wrap sm:flex-nowrap gap-1.5 sm:gap-2">
+          {/* Row 1 on mobile / Left group on desktop: Primary Transport Controls (REW, PLAY/PAUSE, FWD) */}
+          <div className="flex items-center justify-center w-full md:w-auto gap-2 sm:gap-2">
             {/* Previous Track */}
             <button
               onClick={() => {
@@ -348,10 +348,10 @@ export const AnalogBoombox: React.FC<AnalogBoomboxProps> = ({
                 onPrevious();
               }}
               title="Previous Track (Left Arrow)"
-              className="px-2.5 sm:px-3 py-2 bg-[#14141c] hover:bg-[#20202c] active:translate-y-0.5 text-[#E4E3E0] border border-[#2c2c3c] rounded-md shadow-md flex items-center justify-center gap-1.5 text-xs font-mono-custom transition-all cursor-pointer shrink-0"
+              className="min-h-[44px] sm:min-h-0 px-3 sm:px-3 py-2.5 sm:py-2 bg-[#14141c] hover:bg-[#20202c] active:translate-y-0.5 text-[#E4E3E0] border border-[#2c2c3c] rounded-md shadow-md flex items-center justify-center gap-1.5 text-xs font-mono-custom transition-all cursor-pointer shrink-0"
             >
               <SkipBack className="w-4 h-4 text-[#888]" />
-              <span className="hidden xs:inline">REW</span>
+              <span className="inline">REW</span>
             </button>
 
             {/* Main Play / Pause Button with dynamic theme color */}
@@ -361,7 +361,7 @@ export const AnalogBoombox: React.FC<AnalogBoomboxProps> = ({
                 onPlayPause();
               }}
               title={track.isPlaying ? 'Pause Signal (Spacebar)' : 'Engage Signal (Spacebar)'}
-              className={`px-4 sm:px-5 py-2 rounded-md font-mono-custom text-xs font-bold flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer active:translate-y-0.5 text-black shrink-0 ${
+              className={`min-h-[44px] sm:min-h-0 px-5 sm:px-5 py-2.5 sm:py-2 rounded-md font-mono-custom text-xs font-bold flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer active:translate-y-0.5 text-black shrink-0 ${
                 track.isPlaying ? '' : 'animate-pulse'
               }`}
               style={{
@@ -389,12 +389,16 @@ export const AnalogBoombox: React.FC<AnalogBoomboxProps> = ({
                 onNext();
               }}
               title="Next Track (Right Arrow)"
-              className="px-2.5 sm:px-3 py-2 bg-[#14141c] hover:bg-[#20202c] active:translate-y-0.5 text-[#E4E3E0] border border-[#2c2c3c] rounded-md shadow-md flex items-center justify-center gap-1.5 text-xs font-mono-custom transition-all cursor-pointer shrink-0"
+              className="min-h-[44px] sm:min-h-0 px-3 sm:px-3 py-2.5 sm:py-2 bg-[#14141c] hover:bg-[#20202c] active:translate-y-0.5 text-[#E4E3E0] border border-[#2c2c3c] rounded-md shadow-md flex items-center justify-center gap-1.5 text-xs font-mono-custom transition-all cursor-pointer shrink-0"
             >
-              <span className="hidden xs:inline">FWD</span>
+              <span className="inline">FWD</span>
               <SkipForward className="w-4 h-4 text-[#888]" />
             </button>
+          </div>
 
+          {/* Row 2 on mobile / Right group on desktop: Secondary Controls (SHUFFLE, TAPE WARMTH, SCAN FM, VOLUME) */}
+          <div className="flex items-center justify-center flex-wrap md:flex-nowrap w-full md:w-auto gap-2 sm:gap-2">
+            
             {/* Shuffle Button */}
             {onToggleShuffle && (
               <button
@@ -403,7 +407,7 @@ export const AnalogBoombox: React.FC<AnalogBoomboxProps> = ({
                   onToggleShuffle();
                 }}
                 title="Shuffle Playlist Tracks"
-                className="px-2.5 sm:px-3 py-2 rounded-md border text-xs font-mono-custom flex items-center justify-center gap-1.5 transition-all cursor-pointer active:translate-y-0.5 shrink-0"
+                className="min-h-[40px] sm:min-h-0 px-3 sm:px-3 py-2 rounded-md border text-xs font-mono-custom flex items-center justify-center gap-1.5 transition-all cursor-pointer active:translate-y-0.5 shrink-0"
                 style={{
                   backgroundColor: isShuffle ? `${activeTheme.accentColor}20` : '#14141c',
                   borderColor: isShuffle ? activeTheme.accentColor : '#2c2c3c',
@@ -411,14 +415,10 @@ export const AnalogBoombox: React.FC<AnalogBoomboxProps> = ({
                 }}
               >
                 <Shuffle className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">SHUFFLE</span>
+                <span className="inline">SHUFFLE</span>
               </button>
             )}
-          </div>
 
-          {/* Tactile Atmosphere Toggles & Rotary Volume Level */}
-          <div className="flex items-center flex-wrap sm:flex-nowrap gap-1.5 sm:gap-2">
-            
             {/* Tape Lo-fi Hiss FX Switch */}
             <button
               onClick={() => {
@@ -426,7 +426,7 @@ export const AnalogBoombox: React.FC<AnalogBoomboxProps> = ({
                 onToggleTapeHiss();
               }}
               title="Toggle Analog Tape Hiss"
-              className="px-2.5 py-1.5 sm:py-2 rounded-md text-[11px] font-mono-custom border flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0"
+              className="min-h-[40px] sm:min-h-0 px-3 py-2 rounded-md text-[11px] font-mono-custom border flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0"
               style={{
                 backgroundColor: tapeHissEnabled ? `${activeTheme.accentColor}20` : '#14141c',
                 borderColor: tapeHissEnabled ? activeTheme.accentColor : '#2c2c3c',
@@ -434,33 +434,33 @@ export const AnalogBoombox: React.FC<AnalogBoomboxProps> = ({
               }}
             >
               <Disc3 className={`w-3.5 h-3.5 ${tapeHissEnabled ? 'animate-spin' : ''}`} />
-              <span className="hidden xs:inline">TAPE</span>
+              <span className="inline">TAPE</span>
             </button>
 
             {/* Manual Tune Scratch Trigger */}
             <button
               onClick={handleManualTune}
               title="Manual Frequency Scan"
-              className="px-2.5 py-1.5 sm:py-2 bg-[#14141c] hover:bg-[#20202c] border border-[#2c2c3c] rounded-md text-[11px] font-mono-custom text-[#888] flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all shrink-0"
+              className="min-h-[40px] sm:min-h-0 px-3 py-2 bg-[#14141c] hover:bg-[#20202c] border border-[#2c2c3c] rounded-md text-[11px] font-mono-custom text-[#888] flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all shrink-0"
             >
               <RadioIcon className="w-3.5 h-3.5" style={{ color: activeTheme.accentColor }} />
-              <span className="hidden xs:inline">SCAN</span>
+              <span className="inline">SCAN</span>
             </button>
 
             {/* Rotary Volume Dial / Slider - Contained & Protected */}
-            <div className="flex items-center gap-1.5 bg-[#0c0c12] border border-[#222230] px-2.5 py-1.5 rounded-md shrink-0">
-              <Volume2 className="w-3.5 h-3.5 text-[#888] shrink-0" />
+            <div className="min-h-[40px] sm:min-h-0 flex items-center gap-1.5 bg-[#0c0c12] border border-[#222230] px-3 py-1.5 rounded-md shrink-0">
+              <Volume2 className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-[#888] shrink-0" />
               <input
                 type="range"
                 min="0"
                 max="100"
                 value={volume}
                 onChange={(e) => onVolumeChange(Number(e.target.value))}
-                className="w-14 xs:w-16 sm:w-20 h-1.5 bg-[#262636] rounded-lg cursor-pointer"
+                className="w-16 xs:w-20 sm:w-20 h-2 sm:h-1.5 bg-[#262636] rounded-lg cursor-pointer"
                 style={{ accentColor: activeTheme.accentColor }}
                 title={`Volume: ${volume}%`}
               />
-              <span className="text-[10px] text-[#888] font-mono-custom w-5 text-right tabular-nums">{volume}%</span>
+              <span className="text-[11px] sm:text-[10px] text-[#888] font-mono-custom w-6 text-right tabular-nums">{volume}%</span>
             </div>
 
           </div>
