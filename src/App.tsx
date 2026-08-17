@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { Radio, Volume2, Sparkles, Moon, Play, Pause, Disc, Share2, Headphones, Wifi, Maximize, Minimize, Clock, Users, Timer, Check, ChevronDown, Activity } from 'lucide-react';
+import { Radio, Volume2, Sparkles, Moon, Play, Pause, Disc, Share2, Headphones, Wifi, Maximize, Minimize, Clock, Users, Timer, Check, ChevronDown, Activity, ArrowUp } from 'lucide-react';
 import { NightWindowCanvas } from './components/NightWindowCanvas';
 import { AnalogBoombox } from './components/AnalogBoombox';
 import { PlayerBar } from './components/PlayerBar';
@@ -398,6 +398,24 @@ export default function App() {
 
   // 3. Up Next Transmission Queue (live YouTube playlist upcoming tracks)
   const [upNextTracks, setUpNextTracks] = useState<UpNextTrack[]>([]);
+
+  // 4. Smooth Scroll to Top visibility & handler
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 280);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = useCallback(() => {
+    ambientAudio.playTunerClick();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
 
   useEffect(() => {
     const player = playerRef.current;
@@ -1459,6 +1477,22 @@ export default function App() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Floating Scroll To Top Action Button (Appears on scroll) */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          title="Smooth scroll to top"
+          aria-label="Smooth scroll to top of page"
+          className="fixed bottom-28 sm:bottom-22 left-3 sm:left-8 z-30 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0E0E16]/85 backdrop-blur-xl border border-[#2B2B3E]/80 shadow-2xl hover:border-white/40 hover:bg-[#151522] transition-all duration-300 text-white/80 hover:text-white cursor-pointer active:scale-95 animate-fade-in font-mono-custom text-[11px]"
+          style={{
+            boxShadow: `0 8px 25px rgba(0,0,0,0.5), 0 0 12px ${activeTheme.glowColor}40`,
+          }}
+        >
+          <ArrowUp className="w-3.5 h-3.5" style={{ color: activeTheme.accentColor }} />
+          <span className="hidden xs:inline font-semibold">TOP</span>
+        </button>
       )}
 
       {/* Floating Signature Badge: "created by Akash Kumar | 🎵 [Song Title]" */}

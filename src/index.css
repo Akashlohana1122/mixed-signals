@@ -2,12 +2,23 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    min-height: 100%;
   }
 
   body {
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    min-height: 100%;
     transition: background-color 0.4s ease-out;
   }
 
@@ -779,6 +790,7 @@
 .mobile-preset-carousel {
   display: flex;
   overflow-x: auto;
+  scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
@@ -798,14 +810,22 @@
 /* Minimum comfortable touch targets on touch surfaces */
 @media (max-width: 1023px) {
   .touch-target-comfort {
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 44px !important;
+    min-width: 44px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .touch-target-comfort-h {
+    min-height: 44px !important;
   }
   
   /* Prevent horizontal document blowout on mobile viewports */
   body, #root {
     overflow-x: hidden;
     width: 100%;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
