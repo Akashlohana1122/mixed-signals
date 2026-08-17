@@ -145,9 +145,9 @@ export const VibeNotes: React.FC<VibeNotesProps> = ({
   const currentQuote = RADIO_QUOTES[currentQuoteIndex];
 
   return (
-    <div className="w-full max-w-4xl mx-auto my-8 px-4">
-      {/* Micro-Details Grid Banner - Restored to Generous, Prominent Normal Height */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+    <div className="w-full max-w-4xl mx-auto my-8 px-3 sm:px-4">
+      {/* 4 System Telemetry Cards: 2x2 grid on mobile (<768px), 4-column row on md+ (>=768px) */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 mb-6">
         
         {/* ================= 1. INTERACTIVE LISTENING MODE CARD ================= */}
         <div className="relative">
@@ -157,29 +157,29 @@ export const VibeNotes: React.FC<VibeNotesProps> = ({
             aria-haspopup="true"
             aria-expanded={isModeMenuOpen}
             aria-label={`Listening Mode: ${selectedMode.title}. Press to change mode.`}
-            className="w-full h-full min-h-[82px] bg-[#141414]/90 hover:bg-[#1A1A22] active:translate-y-0.5 backdrop-blur-xs border border-[#222] hover:border-[#38384C] rounded-lg p-3.5 text-center transition-all cursor-pointer group focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none flex flex-col justify-between"
+            className="w-full h-full min-h-[86px] sm:min-h-[82px] bg-[#141414]/90 hover:bg-[#1A1A22] active:translate-y-0.5 backdrop-blur-xs border border-[#222] hover:border-[#38384C] rounded-xl sm:rounded-lg p-3 sm:p-3.5 text-center transition-all cursor-pointer group focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:outline-none flex flex-col justify-between select-none"
             style={{
               borderColor: isModeMenuOpen ? activeTheme.accentColor : undefined,
               boxShadow: isModeMenuOpen ? `0 0 12px ${activeTheme.glowColor}30` : undefined,
             }}
           >
-            <div className="flex items-center justify-center gap-1.5 text-[11px] font-mono-custom text-[#888] uppercase tracking-wider mb-1">
-              <ModeIcon className="w-3.5 h-3.5 transition-colors" style={{ color: activeTheme.accentColor }} />
-              <span className="group-hover:text-[#CCC] transition-colors font-medium">LISTENING MODE</span>
-              <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isModeMenuOpen ? 'rotate-180 text-white' : 'text-[#777]'}`} />
+            <div className="flex items-center justify-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-mono-custom text-[#888] uppercase tracking-wider mb-0.5 sm:mb-1">
+              <ModeIcon className="w-3.5 h-3.5 shrink-0 transition-colors" style={{ color: activeTheme.accentColor }} />
+              <span className="group-hover:text-[#CCC] transition-colors font-medium truncate">MODE</span>
+              <ChevronDown className={`w-3 h-3 shrink-0 transition-transform duration-200 ${isModeMenuOpen ? 'rotate-180 text-white' : 'text-[#777]'}`} />
             </div>
             
-            <p className="text-sm font-bold font-mono-custom text-[#E4E3E0] tracking-tight truncate flex items-center justify-center gap-1">
+            <p className="text-xs sm:text-sm font-bold font-mono-custom text-[#E4E3E0] tracking-tight truncate flex items-center justify-center gap-1">
               <span>{selectedMode.title}</span>
             </p>
 
             {/* Subtle Mode Indicator Accent Underline */}
-            <div className="mt-1 flex items-center justify-center gap-1.5">
+            <div className="mt-0.5 sm:mt-1 flex items-center justify-center gap-1 sm:gap-1.5">
               <span 
-                className="w-1.5 h-1.5 rounded-full animate-pulse"
+                className="w-1.5 h-1.5 rounded-full animate-pulse shrink-0"
                 style={{ backgroundColor: activeTheme.accentColor }}
               />
-              <span className="text-[9px] font-mono-custom text-[#888] tracking-widest uppercase">
+              <span className="text-[8.5px] sm:text-[9px] font-mono-custom text-[#888] tracking-widest uppercase truncate">
                 {selectedMode.indicator}
               </span>
             </div>
@@ -191,7 +191,7 @@ export const VibeNotes: React.FC<VibeNotesProps> = ({
               ref={modeMenuRef}
               role="menu"
               aria-label="Select Listening Mode"
-              className="absolute bottom-full left-0 mb-2 w-64 max-w-[calc(100vw-2rem)] bg-[#0C0C14]/95 backdrop-blur-xl border border-[#2B2B3E] shadow-2xl rounded-lg p-1.5 z-50 animate-in fade-in zoom-in-95 duration-150"
+              className="absolute bottom-full left-0 mb-2 w-64 max-w-[calc(100vw-2.5rem)] bg-[#0C0C14]/95 backdrop-blur-xl border border-[#2B2B3E] shadow-2xl rounded-xl p-1.5 z-50 animate-in fade-in zoom-in-95 duration-150"
               style={{
                 borderColor: `${activeTheme.accentColor}50`,
                 boxShadow: `0 10px 30px rgba(0,0,0,0.8), 0 0 15px ${activeTheme.glowColor}25`,
@@ -213,7 +213,7 @@ export const VibeNotes: React.FC<VibeNotesProps> = ({
                       key={mode.id}
                       role="menuitem"
                       onClick={() => handleSelectMode(mode.id)}
-                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded text-left transition-all cursor-pointer font-mono-custom text-xs group ${
+                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-left transition-all cursor-pointer font-mono-custom text-xs group ${
                         isCurrent
                           ? 'bg-white/10 text-white font-bold'
                           : 'text-[#BBB] hover:bg-white/5 hover:text-white'
@@ -246,44 +246,44 @@ export const VibeNotes: React.FC<VibeNotesProps> = ({
         </div>
 
         {/* ================= 2. FREQUENCY CARD ================= */}
-        <div className="bg-[#141414]/90 backdrop-blur-xs border border-[#222] rounded-lg p-3.5 text-center min-h-[82px] flex flex-col justify-between">
-          <div className="flex items-center justify-center gap-1.5 text-[11px] font-mono-custom text-[#888] uppercase tracking-wider mb-1">
-            <Radio className="w-3.5 h-3.5" style={{ color: activeTheme.accentColor }} />
-            <span>FREQUENCY</span>
+        <div className="bg-[#141414]/90 backdrop-blur-xs border border-[#222] rounded-xl sm:rounded-lg p-3 sm:p-3.5 text-center min-h-[86px] sm:min-h-[82px] flex flex-col justify-between select-none">
+          <div className="flex items-center justify-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-mono-custom text-[#888] uppercase tracking-wider mb-0.5 sm:mb-1">
+            <Radio className="w-3.5 h-3.5 shrink-0" style={{ color: activeTheme.accentColor }} />
+            <span className="truncate">FREQUENCY</span>
           </div>
-          <p className="font-bold font-mono-custom font-lcd-custom text-lg tracking-wider" style={{ color: activeTheme.accentColor }}>
+          <p className="font-bold font-mono-custom font-lcd-custom text-base sm:text-lg tracking-wider" style={{ color: activeTheme.accentColor }}>
             98.6 MHz FM
           </p>
-          <div className="text-[9px] font-mono-custom text-[#666] tracking-widest">
+          <div className="text-[8.5px] sm:text-[9px] font-mono-custom text-[#666] tracking-widest uppercase">
             STEREO ANALOG
           </div>
         </div>
 
-        {/* ================= 3. TRANSMISSION CARD ================= */}
-        <div className="bg-[#141414]/90 backdrop-blur-xs border border-[#222] rounded-lg p-3.5 text-center min-h-[82px] flex flex-col justify-between">
-          <div className="flex items-center justify-center gap-1.5 text-[11px] font-mono-custom text-[#888] uppercase tracking-wider mb-1">
-            <Radio className="w-3.5 h-3.5 text-emerald-400" />
-            <span>TRANSMISSION</span>
+        {/* ================= 3. ONLINE LISTENERS / LIVE TRANSMISSION CARD ================= */}
+        <div className="bg-[#141414]/90 backdrop-blur-xs border border-[#222] rounded-xl sm:rounded-lg p-3 sm:p-3.5 text-center min-h-[86px] sm:min-h-[82px] flex flex-col justify-between select-none">
+          <div className="flex items-center justify-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-mono-custom text-[#888] uppercase tracking-wider mb-0.5 sm:mb-1">
+            <Users className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <span className="truncate">LISTENERS</span>
           </div>
-          <p className="font-bold font-mono-custom text-emerald-400 font-lcd-custom text-lg tracking-wider flex items-center justify-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-            LIVE SIGNAL
+          <p className="font-bold font-mono-custom text-emerald-400 font-lcd-custom text-base sm:text-lg tracking-wider flex items-center justify-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0" />
+            <span>{onlineListeners.toLocaleString()} LIVE</span>
           </p>
-          <div className="text-[9px] font-mono-custom text-[#666] tracking-widest">
-            CONNECTED • 24/7
+          <div className="text-[8.5px] sm:text-[9px] font-mono-custom text-[#666] tracking-widest uppercase">
+            TRANSMISSION 24/7
           </div>
         </div>
 
         {/* ================= 4. BROADCAST TIME CARD (REAL LIVE CLOCK) ================= */}
-        <div className="bg-[#141414]/90 backdrop-blur-xs border border-[#222] rounded-lg p-3.5 text-center min-h-[82px] flex flex-col justify-between">
-          <div className="flex items-center justify-center gap-1.5 text-[11px] font-mono-custom text-[#888] uppercase tracking-wider mb-1">
-            <Clock className="w-3.5 h-3.5" style={{ color: activeTheme.accentColor }} />
-            <span>BROADCAST TIME</span>
+        <div className="bg-[#141414]/90 backdrop-blur-xs border border-[#222] rounded-xl sm:rounded-lg p-3 sm:p-3.5 text-center min-h-[86px] sm:min-h-[82px] flex flex-col justify-between select-none">
+          <div className="flex items-center justify-center gap-1 sm:gap-1.5 text-[10px] sm:text-[11px] font-mono-custom text-[#888] uppercase tracking-wider mb-0.5 sm:mb-1">
+            <Clock className="w-3.5 h-3.5 shrink-0" style={{ color: activeTheme.accentColor }} />
+            <span className="truncate">BROADCAST TIME</span>
           </div>
-          <p className="font-bold font-mono-custom font-lcd-custom text-lg tracking-wider" style={{ color: activeTheme.accentColor }}>
+          <p className="font-bold font-mono-custom font-lcd-custom text-base sm:text-lg tracking-wider" style={{ color: activeTheme.accentColor }}>
             {liveTime.time12 || 'LIVE'}
           </p>
-          <div className="text-[9px] font-mono-custom text-[#666] tracking-widest">
+          <div className="text-[8.5px] sm:text-[9px] font-mono-custom text-[#666] tracking-widest uppercase">
             LOCAL SYSTEM TIME
           </div>
         </div>
