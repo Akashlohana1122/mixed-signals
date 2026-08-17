@@ -1,0 +1,6 @@
+{
+  "name": "Mixed Signals",
+  "description": "A nostalgic internet music experience and digital memory capsule powered by curated sounds and analog vibes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

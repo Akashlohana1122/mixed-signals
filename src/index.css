@@ -1,0 +1,775 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    transition: background-color 0.4s ease-out;
+  }
+
+  :root {
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-display: 'Cinzel', 'Space Grotesk', sans-serif;
+    --font-bodoni: 'Bodoni Moda', 'Playfair Display', Georgia, serif;
+    --font-brush: 'Road Rage', 'Permanent Marker', 'Sedgwick Ave Display', cursive;
+    --font-lcd: 'VT323', monospace;
+    --font-digital: 'Share Tech Mono', 'JetBrains Mono', monospace;
+    --font-handwriting: 'Caveat', 'Permanent Marker', cursive;
+
+    /* Dynamic Atmospheric Theme Variables (Synchronized with Backdrop) */
+    --theme-accent: #06B6D4;
+    --theme-glow: rgba(6, 182, 212, 0.45);
+    --theme-accent-soft: rgba(6, 182, 212, 0.22);
+    --theme-border-glow: rgba(6, 182, 212, 0.4);
+  }
+}
+
+.font-bodoni-custom {
+  font-family: var(--font-bodoni);
+}
+
+.font-mono-custom {
+  font-family: var(--font-mono);
+}
+
+.font-digital-custom {
+  font-family: var(--font-digital);
+  font-variant-numeric: tabular-nums;
+}
+
+.font-serif-custom {
+  font-family: var(--font-serif);
+}
+
+.font-display-custom {
+  font-family: var(--font-display);
+}
+
+.font-lcd-custom {
+  font-family: var(--font-lcd);
+}
+
+.font-handwriting-custom {
+  font-family: var(--font-handwriting);
+}
+
+/* CRT Scanlines Overlay (Ultra-fine, subtle, non-intrusive) */
+.scanlines {
+  background: linear-gradient(
+    rgba(18, 18, 24, 0) 50%, 
+    rgba(0, 0, 0, 0.22) 50%
+  );
+  background-size: 100% 3px;
+  pointer-events: none;
+}
+
+/* Phosphor Glow in Editorial Orange #F27D26 */
+.glow-orange {
+  text-shadow: 0 0 12px rgba(242, 125, 38, 0.7), 0 0 24px rgba(242, 125, 38, 0.35);
+}
+
+.glow-amber {
+  text-shadow: 0 0 10px rgba(242, 125, 38, 0.6), 0 0 20px rgba(242, 125, 38, 0.25);
+}
+
+.glow-green {
+  text-shadow: 0 0 10px rgba(52, 211, 153, 0.7), 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+.box-glow-orange {
+  box-shadow: 0 0 25px -5px rgba(242, 125, 38, 0.25), inset 0 0 15px rgba(242, 125, 38, 0.1);
+}
+
+.box-glow-green {
+  box-shadow: 0 0 20px -5px rgba(34, 197, 94, 0.25), inset 0 0 12px rgba(34, 197, 94, 0.1);
+}
+
+/* Tape Reel Animation */
+@keyframes spin-reel {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-reel-playing {
+  animation: spin-reel 3.2s linear infinite;
+}
+
+.spin-reel-paused {
+  animation-play-state: paused;
+}
+
+/* Speaker Pulse */
+@keyframes speaker-thump {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+.speaker-active {
+  animation: speaker-thump 0.55s ease-in-out infinite;
+}
+
+/* Analog Vignette */
+.analog-vignette {
+  background: radial-gradient(circle at 50% 50%, transparent 45%, rgba(6, 6, 8, 0.9) 92%);
+  pointer-events: none;
+}
+
+/* Custom Outlined Text */
+.text-outline-cream {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+@media (min-width: 768px) {
+  .text-outline-cream {
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.9);
+    color: #ffffff;
+  }
+}
+
+/* Mixed Signals Dual-Tier Signature Typography Styles */
+.logo-mixed-neon {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.9)) drop-shadow(0 0 25px rgba(6, 182, 212, 0.5));
+}
+
+@media (min-width: 640px) {
+  .logo-mixed-neon {
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.98);
+  }
+}
+
+@media (min-width: 1024px) {
+  .logo-mixed-neon {
+    -webkit-text-stroke: 2.8px rgba(255, 255, 255, 1);
+  }
+}
+
+.font-brush-custom {
+  font-family: var(--font-brush);
+}
+
+.logo-signals-brush {
+  color: #F8EFE4;
+  font-family: 'Road Rage', 'Permanent Marker', 'Sedgwick Ave Display', cursive;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  transform: skewX(-5deg);
+  text-shadow: 
+    -1.5px 0 rgba(0, 240, 255, 0.45),
+    1.5px 0 rgba(255, 0, 100, 0.45),
+    0 4px 15px rgba(0, 0, 0, 0.95),
+    0 8px 30px rgba(0, 0, 0, 0.85);
+  position: relative;
+  display: inline-block;
+}
+
+/* Authentic dry-brush texture overlay for the SIGNALS text */
+.brush-distress-text {
+  background: linear-gradient(180deg, #FFF6EB 0%, #F5ECE0 60%, #E7DAC9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.4)) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.95));
+}
+
+.logo-gold-letter {
+  background: linear-gradient(180deg, #FFFDF7 0%, #FAF1E0 18%, #EAD8BA 48%, #D4BD94 78%, #BEA06A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.6px rgba(255, 255, 255, 0.8);
+  paint-order: stroke fill;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.95)) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.85));
+  display: inline-block;
+  line-height: 1.1;
+  padding-bottom: 0.05em;
+  padding-top: 0.05em;
+}
+
+@media (min-width: 768px) {
+  .logo-gold-letter {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.9);
+  }
+}
+
+.logo-signals-serif {
+  color: #F7EDE2;
+  font-family: 'Bodoni Moda', 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 900;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 0 35px rgba(247, 237, 226, 0.25);
+}
+
+/* Star Sparkle Pulse */
+@keyframes sparkle-pulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.95;
+    filter: drop-shadow(0 0 8px #38bdf8) drop-shadow(0 0 16px #06b6d4);
+  }
+  50% {
+    transform: scale(1.3) rotate(45deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 14px #67e8f9) drop-shadow(0 0 24px #38bdf8);
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle-pulse 3s ease-in-out infinite;
+}
+
+/* Noise overlay with dynamic shifting film grain */
+.noise-bg {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+.noise-bg-active {
+  animation: grain-shift 0.45s steps(3) infinite;
+}
+
+@keyframes grain-shift {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-1.5%, 1.5%);
+  }
+  50% {
+    transform: translate(1.5%, -1.5%);
+  }
+  75% {
+    transform: translate(-1%, -1%);
+  }
+  100% {
+    transform: translate(1%, 1%);
+  }
+}
+
+/* Aging Electronic Vacuum Tube / Neon Glow Micro-Flicker */
+@keyframes tube-glow-flicker {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 25px rgba(242, 125, 38, 0.35)) brightness(1);
+  }
+  3% {
+    opacity: 0.92;
+    filter: drop-shadow(0 0 20px rgba(242, 125, 38, 0.28)) brightness(0.96);
+  }
+  6% {
+    opacity: 1;
+    filter: drop-shadow(0 0 26px rgba(242, 125, 38, 0.36)) brightness(1.02);
+  }
+  19% {
+    opacity: 0.95;
+    filter: drop-shadow(0 0 22px rgba(242, 125, 38, 0.3)) brightness(0.97);
+  }
+  21% {
+    opacity: 0.88;
+    filter: drop-shadow(0 0 16px rgba(242, 125, 38, 0.2)) brightness(0.91);
+  }
+  23% {
+    opacity: 0.98;
+    filter: drop-shadow(0 0 25px rgba(242, 125, 38, 0.35)) brightness(1);
+  }
+  55% {
+    opacity: 1;
+    filter: drop-shadow(0 0 28px rgba(242, 125, 38, 0.38)) brightness(1.03);
+  }
+  68% {
+    opacity: 0.94;
+    filter: drop-shadow(0 0 21px rgba(242, 125, 38, 0.28)) brightness(0.95);
+  }
+  70% {
+    opacity: 1;
+    filter: drop-shadow(0 0 25px rgba(242, 125, 38, 0.35)) brightness(1);
+  }
+  89% {
+    opacity: 0.91;
+    filter: drop-shadow(0 0 18px rgba(242, 125, 38, 0.24)) brightness(0.93);
+  }
+  91% {
+    opacity: 0.99;
+    filter: drop-shadow(0 0 25px rgba(242, 125, 38, 0.35)) brightness(1);
+  }
+}
+
+.animate-tube-flicker {
+  animation: tube-glow-flicker 5.8s ease-in-out infinite;
+}
+
+/* Floating Dust Particle Drifting Motion */
+@keyframes dust-drift {
+  0% {
+    transform: translateY(0px) translateX(0px) scale(0.9);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-45px) translateX(25px) scale(1.1);
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-90px) translateX(45px) scale(0.85);
+    opacity: 0;
+  }
+}
+
+.dust-particle {
+  animation: dust-drift linear infinite;
+}
+
+/* Slow Ken Burns Background Movement */
+@keyframes ken-burns {
+  0% {
+    transform: scale(1.08) translate(0%, 0%);
+  }
+  50% {
+    transform: scale(1.15) translate(-1.5%, -1%);
+  }
+  100% {
+    transform: scale(1.08) translate(0%, 0%);
+  }
+}
+
+.animate-ken-burns {
+  animation: ken-burns 35s ease-in-out infinite alternate;
+}
+
+/* Mobile & Touch Automatic Ambient Drift Animation */
+@keyframes cinematic-drift {
+  0% {
+    transform: translate3d(0px, 0px, 0) scale(1.06);
+  }
+  25% {
+    transform: translate3d(-10px, -6px, 0) scale(1.08);
+  }
+  50% {
+    transform: translate3d(8px, -12px, 0) scale(1.07);
+  }
+  75% {
+    transform: translate3d(12px, -4px, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(0px, 0px, 0) scale(1.06);
+  }
+}
+
+.animate-cinematic-drift {
+  animation: cinematic-drift 26s ease-in-out infinite alternate;
+}
+
+@keyframes glass-pulse {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  30% {
+    opacity: 1;
+    backdrop-filter: blur(4px);
+  }
+  100% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+}
+
+.animate-glass-pulse {
+  animation: glass-pulse 0.75s ease-out forwards;
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+.animate-shimmer-sweep {
+  animation: shimmer-sweep 0.75s ease-in-out forwards;
+}
+
+@keyframes modal-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+    filter: blur(8px);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.015) translateY(-3px);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-modal-pop {
+  animation: modal-fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes spring-hud-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.88) translateY(22px);
+    filter: blur(8px);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.025) translateY(-2px);
+    filter: blur(0px);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+  78% {
+    opacity: 0.95;
+    transform: scale(1.008) translateY(-1px);
+    filter: blur(0.5px);
+  }
+  90% {
+    opacity: 0.45;
+    transform: scale(0.96) translateY(10px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.88) translateY(22px);
+    filter: blur(8px);
+  }
+}
+
+.animate-spring-hud-pop {
+  animation: spring-hud-pop 1.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes hud-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.88) translateY(16px);
+    filter: blur(8px);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.02) translateY(-2px);
+    filter: blur(0px);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+  80% {
+    opacity: 0.8;
+    transform: scale(0.98) translateY(4px);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.88) translateY(18px);
+    filter: blur(8px);
+  }
+}
+
+.animate-hud-pop {
+  animation: hud-pop 1.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(4px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Magnetic Logo Entrance Keyframes: Slides up, expands and locks into place with elastic magnetic snap */
+/* ========================================================================= */
+/* STAGGERED SEQUENTIAL GLITCH ENTRANCE KEYFRAMES (MIXED -> LOGO -> SIGNALS) */
+/* ========================================================================= */
+
+/* 1. MIXED: Neon Cybernetic Horizontal Jitter & Chromatic Split Entrance */
+@keyframes glitch-enter-mixed {
+  0% {
+    opacity: 0;
+    transform: translateX(-36px) skewX(-8deg);
+    filter: blur(8px) brightness(2.2);
+  }
+  20% {
+    opacity: 0.8;
+    transform: translateX(8px) skewX(4deg);
+    filter: blur(2px) drop-shadow(-4px 0 0 rgba(6, 182, 212, 0.9)) drop-shadow(4px 0 0 rgba(236, 72, 153, 0.7));
+  }
+  40% {
+    opacity: 0.5;
+    transform: translateX(-4px) skewX(-2deg);
+    filter: blur(1px) drop-shadow(3px 0 0 rgba(6, 182, 212, 0.8));
+  }
+  60% {
+    opacity: 0.95;
+    transform: translateX(2px) skewX(1deg);
+    filter: blur(0px);
+  }
+  80% {
+    opacity: 0.9;
+    transform: translateX(-1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) skewX(0deg);
+    filter: blur(0px);
+  }
+}
+
+.animate-glitch-mixed {
+  animation: glitch-enter-mixed 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+  will-change: transform, opacity, filter;
+}
+
+/* 2. CENTER EMBLEM LOGO: Holographic Stroboscopic Scale-Snap & Pulse */
+@keyframes glitch-enter-logo {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.65);
+    filter: blur(12px) brightness(2.4);
+  }
+  25% {
+    opacity: 0.85;
+    transform: translateY(-8px) scale(1.14);
+    filter: blur(3px) brightness(1.6) drop-shadow(0 0 25px var(--theme-accent, #06b6d4));
+  }
+  45% {
+    opacity: 0.6;
+    transform: translateY(4px) scale(0.96);
+    filter: blur(1px) brightness(0.9);
+  }
+  65% {
+    opacity: 0.98;
+    transform: translateY(-2px) scale(1.04);
+    filter: blur(0px) brightness(1.2);
+  }
+  85% {
+    opacity: 0.95;
+    transform: translateY(1px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.animate-glitch-logo {
+  animation: glitch-enter-logo 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  will-change: transform, opacity, filter;
+}
+
+/* 3. SIGNALS: Gold Shimmering Scanline Chromatic Slide Entrance */
+@keyframes glitch-enter-signals {
+  0% {
+    opacity: 0;
+    transform: translateX(36px) skewX(8deg);
+    filter: blur(8px) brightness(2);
+  }
+  20% {
+    opacity: 0.8;
+    transform: translateX(-8px) skewX(-4deg);
+    filter: blur(2px) drop-shadow(5px 0 0 rgba(245, 234, 212, 0.8)) drop-shadow(-3px 0 0 rgba(6, 182, 212, 0.6));
+  }
+  40% {
+    opacity: 0.55;
+    transform: translateX(4px) skewX(2deg);
+    filter: blur(1px) drop-shadow(2px 0 0 rgba(212, 189, 148, 0.9));
+  }
+  60% {
+    opacity: 0.95;
+    transform: translateX(-2px) skewX(-1deg);
+    filter: blur(0px);
+  }
+  80% {
+    opacity: 0.9;
+    transform: translateX(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) skewX(0deg);
+    filter: blur(0px);
+  }
+}
+
+.animate-glitch-signals {
+  animation: glitch-enter-signals 0.78s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+  will-change: transform, opacity, filter;
+}
+
+/* 4. TAGLINE: Subtle Terminal Type-In Fade Entrance (Fires After Signals) */
+@keyframes glitch-enter-tagline {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(6px);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(-2px);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-glitch-tagline {
+  animation: glitch-enter-tagline 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.95s both;
+  will-change: transform, opacity, filter;
+}
+
+/* ========================================================================= */
+/* CHROMATIC ABERRATION HOVER GLITCH EFFECTS (MIXED & SIGNALS ON LOGO HOVER) */
+/* ========================================================================= */
+
+/* Hover Glitch for MIXED: Rapid Random RGB Split & Horizontal Micro-Jitter */
+@keyframes chromatic-glitch-hover-mixed {
+  0% {
+    transform: translate(0, 0) skewX(0deg);
+    filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.9));
+  }
+  15% {
+    transform: translate(-3.5px, 1px) skewX(-2.5deg);
+    filter: drop-shadow(-5px 0 0 rgba(6, 182, 212, 0.95)) drop-shadow(5px 0 0 rgba(236, 72, 153, 0.85)) drop-shadow(0 0 20px rgba(6, 182, 212, 0.7));
+  }
+  30% {
+    transform: translate(2.5px, -1.5px) skewX(1.8deg);
+    filter: drop-shadow(4px -1px 0 rgba(34, 211, 238, 0.9)) drop-shadow(-4px 1px 0 rgba(244, 63, 94, 0.8));
+  }
+  45% {
+    transform: translate(-1.5px, 0.5px) skewX(-1.2deg);
+    filter: drop-shadow(-3px 0 0 rgba(6, 182, 212, 0.9)) drop-shadow(3px 0 0 rgba(236, 72, 153, 0.7));
+  }
+  65% {
+    transform: translate(2px, 1px) skewX(1deg);
+    filter: drop-shadow(3px 0 0 rgba(6, 182, 212, 0.85)) drop-shadow(-3px 0 0 rgba(244, 63, 94, 0.75));
+  }
+  80% {
+    transform: translate(-0.8px, -0.5px) skewX(-0.5deg);
+    filter: drop-shadow(-2px 0 0 rgba(34, 211, 238, 0.8)) drop-shadow(2px 0 0 rgba(236, 72, 153, 0.6));
+  }
+  100% {
+    transform: translate(0, 0) skewX(0deg);
+    filter: drop-shadow(0 0 14px rgba(6, 182, 212, 0.95));
+  }
+}
+
+/* Hover Glitch for SIGNALS: Luxury Gold & Cyan-Magenta Chromatic Shift */
+@keyframes chromatic-glitch-hover-signals {
+  0% {
+    transform: translate(0, 0) skewX(0deg);
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.9));
+  }
+  18% {
+    transform: translate(3.5px, -1px) skewX(2.2deg);
+    filter: drop-shadow(5px 0 0 rgba(245, 234, 212, 0.95)) drop-shadow(-5px 0 0 rgba(6, 182, 212, 0.85)) drop-shadow(0 0 25px rgba(245, 234, 212, 0.7));
+  }
+  35% {
+    transform: translate(-2.5px, 1.5px) skewX(-1.6deg);
+    filter: drop-shadow(-4px 1px 0 rgba(212, 189, 148, 0.9)) drop-shadow(4px -1px 0 rgba(236, 72, 153, 0.75));
+  }
+  55% {
+    transform: translate(2px, -0.8px) skewX(1deg);
+    filter: drop-shadow(3px 0 0 rgba(245, 234, 212, 0.9)) drop-shadow(-3px 0 0 rgba(34, 211, 238, 0.8));
+  }
+  75% {
+    transform: translate(-1.2px, 0.6px) skewX(-0.8deg);
+    filter: drop-shadow(-2px 0 0 rgba(212, 189, 148, 0.8)) drop-shadow(2px 0 0 rgba(236, 72, 153, 0.65));
+  }
+  100% {
+    transform: translate(0, 0) skewX(0deg);
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.95));
+  }
+}
+
+.glitch-hover-mixed {
+  animation: chromatic-glitch-hover-mixed 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite alternate;
+  will-change: transform, filter;
+}
+
+.glitch-hover-signals {
+  animation: chromatic-glitch-hover-signals 0.52s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite alternate;
+  will-change: transform, filter;
+}
+
+/* ========================================================================= */
+/* ANALOG FLOATING RADIO SIGNAL DRIFT ANIMATION                              */
+/* ========================================================================= */
+@keyframes radio-gentle-drift {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(0.3deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-3px) rotate(-0.3deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.animate-radio-drift {
+  animation: radio-gentle-drift 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+
+
+

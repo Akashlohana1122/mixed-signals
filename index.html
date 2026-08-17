@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MIXED SIGNALS — Nostalgic Internet Music Experience</title>
+    <meta name="description" content="No genre. No explanation. Just vibes. A nostalgic late-night digital memory experience." />
+    <meta property="og:title" content="MIXED SIGNALS — Nostalgic Internet Music Experience" />
+    <meta property="og:description" content="No genre. No explanation. Just vibes. An old mysterious radio streaming forgotten memories." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <!-- Google Fonts: Editorial Serif, Bold Display, Retro Terminal, Monospace, Handwritten Tape, Brush Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,700;0,6..96,900;1,6..96,700;1,6..96,900&family=Caveat:wght@600;700&family=Cinzel:wght@700;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Kaushan+Script&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Road+Rage&family=Rock+Salt&family=Rubik+Dirt&family=Sedgwick+Ave+Display&family=Share+Tech+Mono&family=Space+Grotesk:wght@400;600;700&family=Syne:wght@800;900&family=Unbounded:wght@900&family=VT323&display=swap" rel="stylesheet">
+    <script>
+      (function () {
+        try {
+          var originalFetch = window.fetch;
+          var currentFetch = typeof originalFetch === 'function' ? originalFetch.bind(window) : originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function () {
+              return currentFetch;
+            },
+            set: function (newFetch) {
+              currentFetch = newFetch;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (err) {
+          // Ignore
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-[#09090b] text-[#ede8df] overflow-x-hidden select-none antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
